@@ -71,7 +71,7 @@ export function generateResponseToAllQuestions(
   withData: string
 ) {
   if (isValidTruth(previousOffice, withData)) {
-    const nextData = sample(dialogue.withDataResponses)!
+    const nextData = sample(questionsForOffice[currentOffice])!
 
     const nextStages = getNextStages(currentOffice, previousOffice)
     if (nextStages?.[0] === Solved) {

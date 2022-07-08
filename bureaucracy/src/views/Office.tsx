@@ -106,11 +106,7 @@ const Office = ({ office }: { office: Offices }) => {
       {state.whichIsResponse && (
         <>
           <Message from="them">
-            <Typography>
-              Ah, ok. Right. Can you go to either <strong>HR</strong> or{' '}
-              <strong>Stationary</strong> and tell them your{' '}
-              <strong>Back account pin number?</strong> Cheers.
-            </Typography>
+            <Typography>{state.whichIsResponse}</Typography>
           </Message>
 
           <Message from="me">
