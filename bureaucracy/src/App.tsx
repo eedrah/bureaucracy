@@ -1,6 +1,8 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
+import { Offices } from './hooks/useOffice'
+import Office from './views/Office'
 import Page from './views/Page'
 
 const theme = responsiveFontSizes(createTheme())
@@ -11,15 +13,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Page />}>
-            <Route
-              index
-              element={
-                <div>
-                  What are you doing here? Go back to the public area please,
-                  this is staff only.
-                </div>
-              }
-            />
+            <Route index element={<Office office={Offices.Reception} />} />
           </Route>
         </Routes>
       </HashRouter>

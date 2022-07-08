@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 import { ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 
 const Chat = ({
   from,
@@ -55,6 +56,8 @@ const Page = () => (
       <Paper css={{ margin: '1rem', padding: '2rem' }}>
         <Typography variant="h1">Reception</Typography>
       </Paper>
+
+      <Outlet />
 
       <Chat from="them">How can I help you today?</Chat>
 
