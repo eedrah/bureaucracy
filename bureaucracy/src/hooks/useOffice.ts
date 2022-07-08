@@ -22,9 +22,21 @@ function getSentByOptionsFor(office: Offices) {
     .filter((o) => o !== Offices[office])
 }
 
-const initializeStateFor = (office: Offices) => ({
+type State = {
+  office: Offices
+  welcome: string
+  sentByOptions: string[]
+  sentBy: Offices | undefined
+  sentByResponse: string | undefined
+  withData: string | undefined
+  withDataResponse: string | undefined
+  whichIs: string | undefined
+  whichIsResponse: string | undefined
+}
+
+const initializeStateFor = (office: Offices): State => ({
   office,
-  welcome: sample(dialogue.welcomes),
+  welcome: sample(dialogue.welcomes)!,
   sentByOptions: getSentByOptionsFor(office),
   sentBy: undefined,
   sentByResponse: undefined,
@@ -34,12 +46,20 @@ const initializeStateFor = (office: Offices) => ({
   whichIsResponse: undefined,
 })
 
-const reducer = (state, action) => {
+enum ActionKind {
+  SentBy,
+}
+type Actions = {
+  type: ActionKind.SentBy
+  office: Offices
+}
+
+const reducer = (state: State, action: Actions): State => {
   switch (action.type) {
-    case 'sentBy':
+    case ActionKind.SentBy:
       return {
         ...state,
-        sentBy: action.data,
+        sentBy: action.office,
         sentByResponse: sample(dialogue.sentByResponses),
       }
     default:
@@ -50,7 +70,10 @@ const reducer = (state, action) => {
 const useOffice = (office: Offices) => {
   const [state, dispatch] = useReducer(reducer, office, initializeStateFor)
 
-  return state
+  return {
+    state,
+    sentBy: (office: Offices) => dispatch({ type: ActionKind.SentBy, office }),
+  }
 }
 
 export default useOffice

@@ -11,7 +11,7 @@ import useOffice, { Offices } from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {
-  const state = useOffice(office)
+  const { state, sentBy } = useOffice(office)
 
   console.log(state, Offices[office])
 
@@ -26,12 +26,18 @@ const Office = ({ office }: { office: Offices }) => {
       <Message from="them">How can I help you today?</Message>
 
       <Message from="me">
-        <Typography>I got sent here by...</Typography>
-        <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
-          <Button variant="contained">HR</Button>
-          <Button variant="contained">Stationary</Button>
-          <Button variant="contained">sdfsdflsdkfjlksdjfIT</Button>
-        </Stack>
+        {state.sentBy ? (
+          <Typography>I got sent here by {state.sentBy}</Typography>
+        ) : (
+          <>
+            <Typography>I got sent here by...</Typography>
+            <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
+              <Button variant="contained">HR</Button>
+              <Button variant="contained">Stationary</Button>
+              <Button variant="contained">sdfsdflsdkfjlksdjfIT</Button>
+            </Stack>
+          </>
+        )}
       </Message>
 
       <Message from="them">
