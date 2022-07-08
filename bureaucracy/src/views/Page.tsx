@@ -1,4 +1,23 @@
 import { Paper, Typography } from '@mui/material'
+import { ReactNode } from 'react'
+
+const Chat = ({
+  from,
+  children,
+}: {
+  from: 'me' | 'them'
+  children: ReactNode
+}) => (
+  <Paper
+    css={{
+      margin: '1rem',
+      padding: '1rem',
+      alignSelf: from === 'me' ? 'end' : 'start',
+    }}
+  >
+    <Typography>{children}</Typography>
+  </Paper>
+)
 
 export default () => (
   <div
@@ -21,24 +40,8 @@ export default () => (
         <Typography variant="h1">Reception</Typography>
       </Paper>
 
-      <Paper
-        css={{
-          margin: '1rem',
-          padding: '1rem',
-          alignSelf: 'start',
-        }}
-      >
-        <Typography>How can I help you today?</Typography>
-      </Paper>
-      <Paper
-        css={{
-          margin: '1rem',
-          padding: '1rem',
-          alignSelf: 'end',
-        }}
-      >
-        <Typography>Flskdjflskdf sdf sdf </Typography>
-      </Paper>
+      <Chat from="them">How can I help you today?</Chat>
+      <Chat from="me">I got sent here by...</Chat>
     </div>
   </div>
 )
