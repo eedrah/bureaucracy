@@ -6,9 +6,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { allQuestions } from '../funcs/logic'
+import { allQuestions, Offices } from '../funcs/logic'
 
-import useOffice, { Offices } from '../hooks/useOffice'
+import useOffice from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {

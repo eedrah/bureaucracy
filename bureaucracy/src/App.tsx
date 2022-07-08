@@ -1,7 +1,7 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material'
 import { HashRouter, Routes, Route } from 'react-router-dom'
+import { Offices } from './funcs/logic'
 
-import { Offices } from './hooks/useOffice'
 import Office from './views/Office'
 import Page from './views/Page'
 

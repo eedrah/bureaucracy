@@ -1,6 +1,16 @@
 import { sample } from 'lodash'
-import { Offices } from '../hooks/useOffice'
-import dialogue from './dialogue'
+import dialogue, {
+  oneDirection,
+  returnToStart,
+  twoDirections,
+} from './dialogue'
+
+export enum Offices {
+  Reception,
+  HR,
+  Stationary,
+  IT,
+}
 
 export const questionsForOffice = {
   [Offices.Reception]: [
@@ -25,27 +35,32 @@ function isValidTruth(previousOffice: Offices, withData: string) {
   return questionsForOffice[previousOffice].includes(withData)
 }
 
+const Solved = 'SOLVED'
+const SolvedMessage =
+  'Great, I think we are all sorted here. Go tell Jesse that you are "Good to go".'
+const ErrorMessage =
+  "Hmmm, something's gone a bit weird here. You should probably go get the bossman Jesse."
 function getNextStages(currentOffice: Offices, previousOffice: Offices) {
   return {
-    hr: {
-      mm: [cc, im],
-      im: [cc, mm],
-      cc: [im, mm],
+    [Offices.Reception]: {
+      [Offices.Stationary]: [Offices.HR, Offices.IT],
+      [Offices.IT]: [Offices.HR, Offices.Stationary],
+      [Offices.HR]: [Offices.IT, Offices.Stationary],
     },
-    cc: {
-      hr: [im, mm],
-      mm: [hr, im],
-      im: [hr],
+    [Offices.HR]: {
+      [Offices.Reception]: [Offices.IT, Offices.Stationary],
+      [Offices.Stationary]: [Offices.Reception, Offices.IT],
+      [Offices.IT]: [Offices.Reception],
     },
-    im: {
-      cc: [cc, hr],
-      hr: [cc, hr],
-      mm: [hr, mm],
+    [Offices.IT]: {
+      [Offices.HR]: [Offices.HR, Offices.Reception],
+      [Offices.Reception]: [Offices.HR, Offices.Reception],
+      [Offices.Stationary]: [Offices.Reception, Offices.Stationary],
     },
-    mm: {
-      im: [solved],
-      cc: [hr, im],
-      hr: [cc],
+    [Offices.Stationary]: {
+      [Offices.IT]: [Solved],
+      [Offices.HR]: [Offices.Reception, Offices.IT],
+      [Offices.Reception]: [Offices.HR],
     },
   }[currentOffice][previousOffice]
 }
@@ -56,10 +71,25 @@ export function generateResponseToAllQuestions(
   withData: string
 ) {
   if (isValidTruth(previousOffice, withData)) {
-    getNextStages(currentOffice, previousOffice)
-  } else {
-    // getStart()
-  }
+    const nextData = sample(dialogue.withDataResponses)!
 
-  return sample(dialogue.whichIsResponses)
+    const nextStages = getNextStages(currentOffice, previousOffice)
+    if (nextStages?.[0] === Solved) {
+      return SolvedMessage
+    } else if (nextStages?.length === 1) {
+      const nextDirection = sample(oneDirection)!
+      return nextDirection(Offices[nextStages[0] as Offices], nextData)
+    } else if (nextStages?.length === 2) {
+      const nextDirection = sample(twoDirections)!
+      return nextDirection(
+        Offices[nextStages[0] as Offices],
+        Offices[nextStages[1] as Offices],
+        nextData
+      )
+    } else {
+      return ErrorMessage
+    }
+  } else {
+    return sample(returnToStart)!
+  }
 }

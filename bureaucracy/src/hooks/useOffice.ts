@@ -1,21 +1,14 @@
 import { useReducer } from 'react'
 import { sample } from 'lodash'
 import dialogue from '../funcs/dialogue'
-import { generateResponseToAllQuestions } from '../funcs/logic'
+import { generateResponseToAllQuestions, Offices } from '../funcs/logic'
 
-export enum Offices {
-  Reception,
-  HR,
-  Stationary,
-  IT,
-}
-
-enum QuestionStage {
-  SentBy,
-  WithData,
-  WhichIs,
-  Leaving,
-}
+// enum QuestionStage {
+//   SentBy,
+//   WithData,
+//   WhichIs,
+//   Leaving,
+// }
 
 function getSentByOptionsFor(office: Offices): Offices[] {
   return Object.values(Offices)
@@ -90,8 +83,8 @@ const reducer = (state: State, action: Actions): State => {
         whichIs: action.answer,
         whichIsResponse: generateResponseToAllQuestions(
           state.office,
-          state.sentBy,
-          state.withData
+          state.sentBy!,
+          state.withData!
         ),
       }
     case ActionKind.Reset:
