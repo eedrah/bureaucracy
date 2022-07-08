@@ -1,4 +1,11 @@
-import { Button, Paper, Stack, Typography } from '@mui/material'
+import {
+  Autocomplete,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { ReactNode } from 'react'
 
 const Chat = ({
@@ -50,6 +57,7 @@ const Page = () => (
       </Paper>
 
       <Chat from="them">How can I help you today?</Chat>
+
       <Chat from="me">
         <Typography>I got sent here by...</Typography>
         <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
@@ -57,6 +65,18 @@ const Page = () => (
           <Button variant="contained">Stationary</Button>
           <Button variant="contained">sdfsdflsdkfjlksdjfIT</Button>
         </Stack>
+      </Chat>
+
+      <Chat from="them">Oh yeah? And what did they want</Chat>
+
+      <Chat from="me">
+        <Typography>I'm supposed to give you my...</Typography>
+        <Autocomplete
+          css={{ width: '20rem', margin: '1rem 0' }}
+          disablePortal
+          options={[{ label: 'thing', other: 'data' }]}
+          renderInput={(params) => <TextField {...params} label="..." />}
+        />
       </Chat>
     </div>
   </div>
