@@ -12,6 +12,7 @@ const Page = () => (
     <div
       css={{
         maxWidth: '50rem',
+        minWidth: '30rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

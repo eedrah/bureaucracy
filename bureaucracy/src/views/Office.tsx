@@ -15,15 +15,11 @@ const Office = ({ office }: { office: Offices }) => {
   const { state, sentBy, withData, whichIs, reset, register } =
     useOffice(office)
 
-  console.log(state, Offices[office])
-
   return (
     <>
       <Paper css={{ margin: '1rem', padding: '2rem' }}>
         <Typography variant="h1">{Offices[state.office]}</Typography>
       </Paper>
-
-      <code>{JSON.stringify(state)}</code>
 
       <Message from="them">How can I help you today?</Message>
 
