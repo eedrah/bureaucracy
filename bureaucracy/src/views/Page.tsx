@@ -5,22 +5,40 @@ export default () => (
     css={{
       minHeight: '100vh',
       backgroundColor: 'hsl(200, 70%, 60%)',
+      display: 'flex',
+      justifyContent: 'center',
     }}
   >
-    <header
+    <div
       css={{
-        padding: '10vh 0',
+        maxWidth: '50rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
-      <Paper>
-        <Typography css={{ padding: '2rem' }} variant="h1">
-          Reception
-        </Typography>
+      <Paper css={{ margin: '1rem', padding: '2rem' }}>
+        <Typography variant="h1">Reception</Typography>
       </Paper>
-    </header>
+
+      <Paper
+        css={{
+          margin: '1rem',
+          padding: '1rem',
+          alignSelf: 'start',
+        }}
+      >
+        <Typography>How can I help you today?</Typography>
+      </Paper>
+      <Paper
+        css={{
+          margin: '1rem',
+          padding: '1rem',
+          alignSelf: 'end',
+        }}
+      >
+        <Typography>Flskdjflskdf sdf sdf </Typography>
+      </Paper>
+    </div>
   </div>
 )
