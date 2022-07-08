@@ -20,7 +20,7 @@ const BackOffice = () => (
     <Stack spacing={2}>
       {Object.values(Offices)
         .filter((v) => isNaN(Number(v)))
-        .map((office: string) => (
+        .map((office: any) => (
           <Link>
             <A to={office}>{office}</A>
           </Link>
