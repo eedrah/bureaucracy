@@ -6,13 +6,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { SyntheticEvent } from 'react'
 import { allQuestions } from '../funcs/logic'
 
 import useOffice, { Offices } from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {
-  const { state, sentBy, withData } = useOffice(office)
+  const { state, sentBy, withData, whichIs } = useOffice(office)
 
   console.log(state, Offices[office])
 
@@ -74,7 +75,15 @@ const Office = ({ office }: { office: Offices }) => {
 
           <Message from="me">
             <Typography>It's...</Typography>
-            <TextField css={{ width: '20rem', margin: '1rem 0' }} label="..." />
+            <TextField
+              css={{ width: '20rem', margin: '1rem 0' }}
+              label="..."
+              onKeyDown={(e: any) => {
+                if (e.keyCode === 13) {
+                  whichIs(e.target.value)
+                }
+              }}
+            />
           </Message>
         </>
       )}
