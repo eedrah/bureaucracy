@@ -16,14 +16,14 @@ export const questionsForOffice = {
     'plans about children',
   ],
   [Offices.HR]: [
-    'number of times you were married',
+    'number of times married',
     'favorite sports team',
     'religious beliefs',
     'previous salary',
   ],
   [Offices.Stationary]: [
-    'number of tattoos you have',
-    'number of children you have to look after in the weekend',
+    'number of tattoos',
+    'number of children cared for in the weekend',
     'voting history',
     'ability to work long hours without compensation',
   ],
