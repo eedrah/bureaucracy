@@ -13,7 +13,7 @@ import useOffice, { Offices } from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {
-  const { state, sentBy, withData, whichIs } = useOffice(office)
+  const { state, sentBy, withData, whichIs, reset } = useOffice(office)
 
   console.log(state, Offices[office])
 
@@ -115,7 +115,9 @@ const Office = ({ office }: { office: Offices }) => {
           </Message>
 
           <Message from="me">
-            <Button variant="contained">Yeah, sure</Button>
+            <Button variant="contained" onClick={reset}>
+              Yeah, sure
+            </Button>
           </Message>
         </>
       )}

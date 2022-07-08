@@ -50,6 +50,7 @@ enum ActionKind {
   SentBy,
   WithData,
   WhichIs,
+  Reset,
 }
 type Actions =
   | {
@@ -63,6 +64,9 @@ type Actions =
   | {
       type: ActionKind.WhichIs
       answer: string
+    }
+  | {
+      type: ActionKind.Reset
     }
 
 const reducer = (state: State, action: Actions): State => {
@@ -85,6 +89,8 @@ const reducer = (state: State, action: Actions): State => {
         whichIs: action.answer,
         whichIsResponse: sample(dialogue.whichIsResponses),
       }
+    case ActionKind.Reset:
+      return initializeStateFor(state.office)
     default:
       throw new Error()
   }
@@ -109,6 +115,10 @@ const useOffice = (office: Offices) => {
       dispatch({
         type: ActionKind.WhichIs,
         answer,
+      }),
+    reset: () =>
+      dispatch({
+        type: ActionKind.Reset,
       }),
   }
 }
