@@ -12,7 +12,8 @@ import useOffice from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {
-  const { state, sentBy, withData, whichIs, reset } = useOffice(office)
+  const { state, sentBy, withData, whichIs, reset, register } =
+    useOffice(office)
 
   console.log(state, Offices[office])
 
@@ -26,26 +27,49 @@ const Office = ({ office }: { office: Offices }) => {
 
       <Message from="them">How can I help you today?</Message>
 
-      <Message from="me">
-        {state.sentBy ? (
-          <Typography>I got sent here by {Offices[state.sentBy]}</Typography>
-        ) : (
-          <>
-            <Typography>I got sent here by...</Typography>
-            <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
-              {state.sentByOptions.map((option) => (
-                <Button
-                  key={option}
-                  variant="contained"
-                  onClick={() => sentBy(option)}
-                >
-                  {Offices[option]}
-                </Button>
-              ))}
-            </Stack>
-          </>
-        )}
-      </Message>
+      {office === Offices.Reception && !state.sentBy && (
+        <Message from="me">
+          {state.isRegistering ? (
+            <Typography>I'd like to register for employee benefits</Typography>
+          ) : (
+            <>
+              <Button variant="contained" onClick={register}>
+                I'd like to register for employee benefits
+              </Button>
+              <Typography css={{ marginTop: '1rem' }} align="center">
+                OR
+              </Typography>
+            </>
+          )}
+        </Message>
+      )}
+
+      {!state.isRegistering && (
+        <Message from="me">
+          {state.sentBy ? (
+            <>
+              <Typography>
+                I got sent here by {Offices[state.sentBy]}
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Typography>I got sent here by...</Typography>
+              <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
+                {state.sentByOptions.map((option) => (
+                  <Button
+                    key={option}
+                    variant="contained"
+                    onClick={() => sentBy(option)}
+                  >
+                    {Offices[option]}
+                  </Button>
+                ))}
+              </Stack>
+            </>
+          )}
+        </Message>
+      )}
 
       {state.sentByResponse && (
         <>

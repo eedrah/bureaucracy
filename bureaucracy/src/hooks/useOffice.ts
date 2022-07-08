@@ -1,7 +1,11 @@
 import { useReducer } from 'react'
 import { sample } from 'lodash'
 import dialogue from '../funcs/dialogue'
-import { generateResponseToAllQuestions, Offices } from '../funcs/logic'
+import {
+  generateResponseToAllQuestions,
+  Offices,
+  questionsForOffice,
+} from '../funcs/logic'
 
 // enum QuestionStage {
 //   SentBy,
@@ -26,6 +30,7 @@ type State = {
   withDataResponse: string | undefined
   whichIs: string | undefined
   whichIsResponse: string | undefined
+  isRegistering: boolean
 }
 
 const initializeStateFor = (office: Offices): State => ({
@@ -38,6 +43,7 @@ const initializeStateFor = (office: Offices): State => ({
   withDataResponse: undefined,
   whichIs: undefined,
   whichIsResponse: undefined,
+  isRegistering: false,
 })
 
 enum ActionKind {
@@ -45,6 +51,7 @@ enum ActionKind {
   WithData,
   WhichIs,
   Reset,
+  Register,
 }
 type Actions =
   | {
@@ -61,6 +68,9 @@ type Actions =
     }
   | {
       type: ActionKind.Reset
+    }
+  | {
+      type: ActionKind.Register
     }
 
 const reducer = (state: State, action: Actions): State => {
@@ -89,6 +99,16 @@ const reducer = (state: State, action: Actions): State => {
       }
     case ActionKind.Reset:
       return initializeStateFor(state.office)
+    case ActionKind.Register:
+      return {
+        ...state,
+        whichIsResponse: generateResponseToAllQuestions(
+          state.office,
+          Offices.IT,
+          questionsForOffice[Offices.IT][0]
+        ),
+        isRegistering: true,
+      }
     default:
       throw new Error()
   }
@@ -117,6 +137,10 @@ const useOffice = (office: Offices) => {
     reset: () =>
       dispatch({
         type: ActionKind.Reset,
+      }),
+    register: () =>
+      dispatch({
+        type: ActionKind.Register,
       }),
   }
 }
