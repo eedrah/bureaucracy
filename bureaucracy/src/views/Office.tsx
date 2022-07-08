@@ -12,7 +12,7 @@ import useOffice, { Offices } from '../hooks/useOffice'
 import Message from './Message'
 
 const Office = ({ office }: { office: Offices }) => {
-  const { state, sentBy } = useOffice(office)
+  const { state, sentBy, withData } = useOffice(office)
 
   console.log(state, Offices[office])
 
@@ -60,6 +60,7 @@ const Office = ({ office }: { office: Offices }) => {
               disablePortal
               options={allQuestions}
               renderInput={(params) => <TextField {...params} label="..." />}
+              onChange={(_, v) => withData(v)}
             />
           </Message>
         </>

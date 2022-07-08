@@ -13,23 +13,8 @@ export const questionsForOffice = {
     'HR question3',
     'HR question4',
   ],
-  [Offices.Stationary]: [
-    'Stationary question',
-    'Stationary question',
-    'Stationary question',
-    'Stationary question',
-    'Stationary question',
-  ],
-  [Offices.IT]: [
-    'IT question',
-    'IT question',
-    'IT question',
-    'IT question',
-    'IT question',
-    'IT question',
-    'IT question',
-    'IT question',
-  ],
+  [Offices.Stationary]: ['Stationary question'],
+  [Offices.IT]: ['IT question'],
 }
 
 export const allQuestions = Object.values(questionsForOffice).flat()

@@ -48,11 +48,17 @@ const initializeStateFor = (office: Offices): State => ({
 
 enum ActionKind {
   SentBy,
+  WithData,
 }
-type Actions = {
-  type: ActionKind.SentBy
-  office: Offices
-}
+type Actions =
+  | {
+      type: ActionKind.SentBy
+      office: Offices
+    }
+  | {
+      type: ActionKind.WithData
+      question: string
+    }
 
 const reducer = (state: State, action: Actions): State => {
   switch (action.type) {
@@ -61,6 +67,12 @@ const reducer = (state: State, action: Actions): State => {
         ...state,
         sentBy: action.office,
         sentByResponse: sample(dialogue.sentByResponses),
+      }
+    case ActionKind.WithData:
+      return {
+        ...state,
+        withData: action.question,
+        withDataResponse: sample(dialogue.withDataResponses),
       }
     default:
       throw new Error()
@@ -76,6 +88,11 @@ const useOffice = (office: Offices) => {
       dispatch({
         type: ActionKind.SentBy,
         office,
+      }),
+    withData: (question: string) =>
+      dispatch({
+        type: ActionKind.WithData,
+        question,
       }),
   }
 }
