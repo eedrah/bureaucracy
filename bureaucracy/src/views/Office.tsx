@@ -55,14 +55,24 @@ const Office = ({ office }: { office: Offices }) => {
           </Message>
 
           <Message from="me">
-            <Typography>I'm supposed to give you my...</Typography>
-            <Autocomplete
-              css={{ width: '20rem', margin: '1rem 0' }}
-              disablePortal
-              options={allQuestions}
-              renderInput={(params) => <TextField {...params} label="..." />}
-              onChange={(_, v) => withData(v)}
-            />
+            {state.withData ? (
+              <Typography>
+                I'm supposed to give you my {state.withData}
+              </Typography>
+            ) : (
+              <>
+                <Typography>I'm supposed to give you my...</Typography>
+                <Autocomplete
+                  css={{ width: '20rem', margin: '1rem 0' }}
+                  disablePortal
+                  options={allQuestions}
+                  renderInput={(params) => (
+                    <TextField {...params} label="..." />
+                  )}
+                  onChange={(_, v) => withData(v)}
+                />
+              </>
+            )}
           </Message>
         </>
       )}
@@ -74,16 +84,22 @@ const Office = ({ office }: { office: Offices }) => {
           </Message>
 
           <Message from="me">
-            <Typography>It's...</Typography>
-            <TextField
-              css={{ width: '20rem', margin: '1rem 0' }}
-              label="..."
-              onKeyDown={(e: any) => {
-                if (e.keyCode === 13) {
-                  whichIs(e.target.value)
-                }
-              }}
-            />
+            {state.whichIs ? (
+              <Typography>It's {state.whichIs}</Typography>
+            ) : (
+              <>
+                <Typography>It's...</Typography>
+                <TextField
+                  css={{ width: '20rem', margin: '1rem 0' }}
+                  label="..."
+                  onKeyDown={(e: any) => {
+                    if (e.keyCode === 13) {
+                      whichIs(e.target.value)
+                    }
+                  }}
+                />
+              </>
+            )}
           </Message>
         </>
       )}
