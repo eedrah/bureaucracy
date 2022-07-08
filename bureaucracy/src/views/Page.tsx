@@ -19,7 +19,7 @@ const Chat = ({
   </Paper>
 )
 
-export default () => (
+const Page = () => (
   <div
     css={{
       minHeight: '100vh',
@@ -45,3 +45,5 @@ export default () => (
     </div>
   </div>
 )
+
+export default Page
