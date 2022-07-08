@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material'
+import { Button, Paper, Stack, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 
 const Chat = ({
@@ -10,12 +10,21 @@ const Chat = ({
 }) => (
   <Paper
     css={{
+      maxWidth: '40rem',
       margin: '1rem',
       padding: '1rem',
-      alignSelf: from === 'me' ? 'end' : 'start',
+      ...(from === 'me'
+        ? {
+            alignSelf: 'end',
+            marginLeft: '4rem',
+          }
+        : {
+            alignSelf: 'start',
+            marginRight: '4rem',
+          }),
     }}
   >
-    <Typography>{children}</Typography>
+    {children}
   </Paper>
 )
 
@@ -41,7 +50,14 @@ const Page = () => (
       </Paper>
 
       <Chat from="them">How can I help you today?</Chat>
-      <Chat from="me">I got sent here by...</Chat>
+      <Chat from="me">
+        <Typography>I got sent here by...</Typography>
+        <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
+          <Button variant="contained">HR</Button>
+          <Button variant="contained">Stationary</Button>
+          <Button variant="contained">sdfsdflsdkfjlksdjfIT</Button>
+        </Stack>
+      </Chat>
     </div>
   </div>
 )
