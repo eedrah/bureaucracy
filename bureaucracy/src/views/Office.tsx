@@ -19,7 +19,7 @@ const Office = ({ office }: { office: Offices }) => {
   return (
     <>
       <Paper css={{ margin: '1rem', padding: '2rem' }}>
-        <Typography variant="h1">Reception</Typography>
+        <Typography variant="h1">{Offices[state.office]}</Typography>
       </Paper>
 
       <code>{JSON.stringify(state)}</code>
