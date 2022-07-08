@@ -27,14 +27,20 @@ const Office = ({ office }: { office: Offices }) => {
 
       <Message from="me">
         {state.sentBy ? (
-          <Typography>I got sent here by {state.sentBy}</Typography>
+          <Typography>I got sent here by {Offices[state.sentBy]}</Typography>
         ) : (
           <>
             <Typography>I got sent here by...</Typography>
             <Stack css={{ margin: '1rem 0' }} direction="row" spacing={2}>
-              <Button variant="contained">HR</Button>
-              <Button variant="contained">Stationary</Button>
-              <Button variant="contained">sdfsdflsdkfjlksdjfIT</Button>
+              {state.sentByOptions.map((option) => (
+                <Button
+                  key={option}
+                  variant="contained"
+                  onClick={() => sentBy(option)}
+                >
+                  {Offices[option]}
+                </Button>
+              ))}
             </Stack>
           </>
         )}

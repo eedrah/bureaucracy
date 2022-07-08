@@ -16,16 +16,16 @@ enum QuestionStage {
   Leaving,
 }
 
-function getSentByOptionsFor(office: Offices) {
-  return Object.keys(Offices)
-    .filter((k) => isNaN(Number(k)))
-    .filter((o) => o !== Offices[office])
+function getSentByOptionsFor(office: Offices): Offices[] {
+  return Object.values(Offices)
+    .filter((v) => !isNaN(Number(v)))
+    .filter((o) => o !== office) as Offices[]
 }
 
 type State = {
   office: Offices
   welcome: string
-  sentByOptions: string[]
+  sentByOptions: Offices[]
   sentBy: Offices | undefined
   sentByResponse: string | undefined
   withData: string | undefined
@@ -72,7 +72,11 @@ const useOffice = (office: Offices) => {
 
   return {
     state,
-    sentBy: (office: Offices) => dispatch({ type: ActionKind.SentBy, office }),
+    sentBy: (office: Offices) =>
+      dispatch({
+        type: ActionKind.SentBy,
+        office,
+      }),
   }
 }
 
