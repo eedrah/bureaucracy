@@ -1,6 +1,7 @@
 import { useReducer } from 'react'
 import { sample } from 'lodash'
 import dialogue from '../funcs/dialogue'
+import { generateResponseToAllQuestions } from '../funcs/logic'
 
 export enum Offices {
   Reception,
@@ -87,7 +88,11 @@ const reducer = (state: State, action: Actions): State => {
       return {
         ...state,
         whichIs: action.answer,
-        whichIsResponse: sample(dialogue.whichIsResponses),
+        whichIsResponse: generateResponseToAllQuestions(
+          state.office,
+          state.sentBy,
+          state.withData
+        ),
       }
     case ActionKind.Reset:
       return initializeStateFor(state.office)

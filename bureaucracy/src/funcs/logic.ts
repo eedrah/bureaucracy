@@ -1,4 +1,6 @@
+import { sample } from 'lodash'
 import { Offices } from '../hooks/useOffice'
+import dialogue from './dialogue'
 
 export const questionsForOffice = {
   [Offices.Reception]: [
@@ -18,3 +20,46 @@ export const questionsForOffice = {
 }
 
 export const allQuestions = Object.values(questionsForOffice).flat()
+
+function isValidTruth(previousOffice: Offices, withData: string) {
+  return questionsForOffice[previousOffice].includes(withData)
+}
+
+function getNextStages(currentOffice: Offices, previousOffice: Offices) {
+  return {
+    hr: {
+      mm: [cc, im],
+      im: [cc, mm],
+      cc: [im, mm],
+    },
+    cc: {
+      hr: [im, mm],
+      mm: [hr, im],
+      im: [hr],
+    },
+    im: {
+      cc: [cc, hr],
+      hr: [cc, hr],
+      mm: [hr, mm],
+    },
+    mm: {
+      im: [solved],
+      cc: [hr, im],
+      hr: [cc],
+    },
+  }[currentOffice][previousOffice]
+}
+
+export function generateResponseToAllQuestions(
+  currentOffice: Offices,
+  previousOffice: Offices,
+  withData: string
+) {
+  if (isValidTruth(previousOffice, withData)) {
+    getNextStages(currentOffice, previousOffice)
+  } else {
+    // getStart()
+  }
+
+  return sample(dialogue.whichIsResponses)
+}

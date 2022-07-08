@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { SyntheticEvent } from 'react'
 import { allQuestions } from '../funcs/logic'
 
 import useOffice, { Offices } from '../hooks/useOffice'
@@ -69,7 +68,7 @@ const Office = ({ office }: { office: Offices }) => {
                   renderInput={(params) => (
                     <TextField {...params} label="..." />
                   )}
-                  onChange={(_, v) => withData(v)}
+                  onChange={(_, v) => v && withData(v)}
                 />
               </>
             )}
