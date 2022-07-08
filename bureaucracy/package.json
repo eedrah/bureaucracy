@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy-only": "gh-pages -d dist",
-    "build-and-deploy": "npm run build -- --base=/bureaucracy/ && npm run deploy-only"
+    "build-and-deploy": "npm run build -- --base=./ && npm run deploy-only"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
