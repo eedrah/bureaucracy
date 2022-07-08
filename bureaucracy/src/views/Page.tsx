@@ -4,7 +4,7 @@ const Page = () => (
   <div
     css={{
       minHeight: '100vh',
-      backgroundColor: 'hsl(200, 70%, 60%)',
+      backgroundColor: 'hsl(200, 40%, 60%)',
       display: 'flex',
       justifyContent: 'center',
     }}
