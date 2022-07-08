@@ -46,40 +46,52 @@ const Office = ({ office }: { office: Offices }) => {
         )}
       </Message>
 
-      <Message from="them">
-        <Typography>Oh yeah? And what did they want</Typography>
-      </Message>
+      {state.sentByResponse && (
+        <>
+          <Message from="them">
+            <Typography>{state.sentByResponse}</Typography>
+          </Message>
 
-      <Message from="me">
-        <Typography>I'm supposed to give you my...</Typography>
-        <Autocomplete
-          css={{ width: '20rem', margin: '1rem 0' }}
-          disablePortal
-          options={[{ label: 'thing', other: 'data' }]}
-          renderInput={(params) => <TextField {...params} label="..." />}
-        />
-      </Message>
+          <Message from="me">
+            <Typography>I'm supposed to give you my...</Typography>
+            <Autocomplete
+              css={{ width: '20rem', margin: '1rem 0' }}
+              disablePortal
+              options={[{ label: 'thing', other: 'data' }]}
+              renderInput={(params) => <TextField {...params} label="..." />}
+            />
+          </Message>
+        </>
+      )}
 
-      <Message from="them">
-        <Typography>And that is?</Typography>
-      </Message>
+      {state.withDataResponse && (
+        <>
+          <Message from="them">
+            <Typography>And that is?</Typography>
+          </Message>
 
-      <Message from="me">
-        <Typography>It's...</Typography>
-        <TextField css={{ width: '20rem', margin: '1rem 0' }} label="..." />
-      </Message>
+          <Message from="me">
+            <Typography>It's...</Typography>
+            <TextField css={{ width: '20rem', margin: '1rem 0' }} label="..." />
+          </Message>
+        </>
+      )}
 
-      <Message from="them">
-        <Typography>
-          Ah, ok. Right. Can you go to either <strong>HR</strong> or{' '}
-          <strong>Stationary</strong> and tell them your{' '}
-          <strong>Back account pin number?</strong> Cheers.
-        </Typography>
-      </Message>
+      {state.whichIsResponse && (
+        <>
+          <Message from="them">
+            <Typography>
+              Ah, ok. Right. Can you go to either <strong>HR</strong> or{' '}
+              <strong>Stationary</strong> and tell them your{' '}
+              <strong>Back account pin number?</strong> Cheers.
+            </Typography>
+          </Message>
 
-      <Message from="me">
-        <Button variant="contained">Yeah, sure</Button>
-      </Message>
+          <Message from="me">
+            <Button variant="contained">Yeah, sure</Button>
+          </Message>
+        </>
+      )}
     </>
   )
 }
