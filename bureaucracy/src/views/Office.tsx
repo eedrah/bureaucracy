@@ -46,7 +46,7 @@ const Office = ({ office }: { office: Offices }) => {
 
       {!state.isRegistering && (
         <Message from="me">
-          {state.sentBy ? (
+          {state.sentBy != null ? (
             <>
               <Typography>
                 I got sent here by {Offices[state.sentBy]}
