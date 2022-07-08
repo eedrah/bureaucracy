@@ -67,7 +67,9 @@ const Page = () => (
         </Stack>
       </Chat>
 
-      <Chat from="them">Oh yeah? And what did they want</Chat>
+      <Chat from="them">
+        <Typography>Oh yeah? And what did they want</Typography>
+      </Chat>
 
       <Chat from="me">
         <Typography>I'm supposed to give you my...</Typography>
@@ -77,6 +79,27 @@ const Page = () => (
           options={[{ label: 'thing', other: 'data' }]}
           renderInput={(params) => <TextField {...params} label="..." />}
         />
+      </Chat>
+
+      <Chat from="them">
+        <Typography>And that is?</Typography>
+      </Chat>
+
+      <Chat from="me">
+        <Typography>It's...</Typography>
+        <TextField css={{ width: '20rem', margin: '1rem 0' }} label="..." />
+      </Chat>
+
+      <Chat from="them">
+        <Typography>
+          Ah, ok. Right. Can you go to either <strong>HR</strong> or{' '}
+          <strong>Stationary</strong> and tell them your{' '}
+          <strong>Back account pin number?</strong> Cheers.
+        </Typography>
+      </Chat>
+
+      <Chat from="me">
+        <Button variant="contained">Yeah, sure</Button>
       </Chat>
     </div>
   </div>
