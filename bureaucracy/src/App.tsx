@@ -21,7 +21,6 @@ function App() {
               }
             />
           </Route>
-          <Route path="test" element={'Testing testing'} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
