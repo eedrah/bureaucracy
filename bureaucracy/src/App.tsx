@@ -21,6 +21,7 @@ function App() {
               }
             />
           </Route>
+          <Route path="test" element={'Testing testing'} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
