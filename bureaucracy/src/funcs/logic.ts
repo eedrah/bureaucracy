@@ -1,9 +1,5 @@
-import { sample } from 'lodash'
-import dialogue, {
-  oneDirection,
-  returnToStart,
-  twoDirections,
-} from './dialogue'
+import { sample, shuffle } from 'lodash'
+import { oneDirection, returnToStart, twoDirections } from './dialogue'
 
 export enum Offices {
   Reception,
@@ -14,22 +10,32 @@ export enum Offices {
 
 export const questionsForOffice = {
   [Offices.Reception]: [
-    'Reception question 1',
-    'Reception question 2',
-    'Reception question 3',
-    'Reception question 4',
+    'retirement plans',
+    'sexual orientation',
+    "partner's job",
+    'plans about children',
   ],
   [Offices.HR]: [
-    'HR question 1',
-    'HR question 2',
-    'HR question3',
-    'HR question4',
+    'number of times you were married',
+    'favorite sports team',
+    'religious beliefs',
+    'previous salary',
   ],
-  [Offices.Stationary]: ['Stationary question'],
-  [Offices.IT]: ['IT question'],
+  [Offices.Stationary]: [
+    'number of tattoos you have',
+    'number of children you have to look after in the weekend',
+    'voting history',
+    'ability to work long hours without compensation',
+  ],
+  [Offices.IT]: [
+    'country of birth',
+    'genetic history',
+    'disability status',
+    "partner's date of birth",
+  ],
 }
 
-export const allQuestions = Object.values(questionsForOffice).flat()
+export const allQuestions = shuffle(Object.values(questionsForOffice).flat())
 
 function isValidTruth(previousOffice: Offices, withData: string) {
   return questionsForOffice[previousOffice].includes(withData)
