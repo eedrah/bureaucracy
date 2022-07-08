@@ -1,25 +1,26 @@
+import { Paper, Typography } from '@mui/material'
+
 export default () => (
   <div
     css={{
-      fontSize: 'calc(10px + 2vmin)',
-      backgroundColor: 'hsl(240, 50%, 50%)',
+      minHeight: '100vh',
+      backgroundColor: 'hsl(200, 70%, 60%)',
     }}
   >
     <header
       css={{
-        minHeight: '100vh',
-
+        padding: '10vh 0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-
-        backgroundColor: '#282c34',
-
-        color: 'white',
       }}
     >
-      <h1>Reception</h1>
+      <Paper>
+        <Typography css={{ padding: '2rem' }} variant="h1">
+          Reception
+        </Typography>
+      </Paper>
     </header>
   </div>
 )
