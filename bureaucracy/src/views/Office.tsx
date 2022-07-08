@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { allQuestions } from '../funcs/logic'
 
 import useOffice, { Offices } from '../hooks/useOffice'
 import Message from './Message'
@@ -57,7 +58,7 @@ const Office = ({ office }: { office: Offices }) => {
             <Autocomplete
               css={{ width: '20rem', margin: '1rem 0' }}
               disablePortal
-              options={[{ label: 'thing', other: 'data' }]}
+              options={allQuestions}
               renderInput={(params) => <TextField {...params} label="..." />}
             />
           </Message>
