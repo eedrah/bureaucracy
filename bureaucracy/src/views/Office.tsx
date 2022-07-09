@@ -21,7 +21,7 @@ const Office = ({ office }: { office: Offices }) => {
         <Typography variant="h1">{Offices[state.office]}</Typography>
       </Paper>
 
-      <Message from="them">How can I help you today?</Message>
+      <Message from="them">{state.welcome}</Message>
 
       {office === Offices.Reception && !state.sentBy && (
         <Message from="me">
